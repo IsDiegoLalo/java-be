@@ -1,0 +1,55 @@
+# Project-specific
+job_description.txt
+.kiro/
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Build directories
+build/
+target/
+out/
+
+# Gradle
+.gradle/
+**/build/
+
+# Maven
+**/target/
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment and secrets
+.env
+*.env.local
+*.env.*.local
+
+# Kotlin
+*.kotlin_module
+
+# Test results
+test-results/
+test-output/
