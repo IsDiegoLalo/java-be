@@ -1,0 +1,48 @@
+# Build outputs
+build/
+target/
+out/
+
+# Gradle
+.gradle/
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+
+# Git
+.git/
+.gitignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment and secrets
+.env
+*.env.local
+*.env.*.local
+
+# Logs
+*.log
+
+# Test results
+test-results/
+test-output/
+
+# Kotlin build artifacts
+.kotlin/
+
+# jqwik database
+.jqwik-database
+
+# Documentation and non-essential files
+*.md
+job_description.txt
+LICENSE
+
+# Kiro specs
+.kiro/
