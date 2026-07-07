@@ -1,0 +1,31 @@
+About the job
+At Intellias, we're always on the lookout for exceptional talent to join our team in Central & South America. Over 20 years of market experience, Intellias brings together technologists, creators and innovators in Europe, North and Latin America, and the Middle East. Join our international team and take the mission to solve the advanced tech challenges of tomorrow!
+
+
+
+If you're enthusiastic about contributing your skills and experience to our organization, we invite you to submit your CV for this position.
+
+
+
+Requirements
+
+ Advanced Business Technical English (Mandatory)
+6+ years of experience designing, developing, deploying, and maintaining backend services and distributed systems in production using Java 21, Spring Boot 3.x, Docker (Mandatory)
+2+ years of experience designing, developing, deploying, and maintaining backend services and distributed systems in production using Kotlin (Mandatory)
+Strong ownership and self-management in a fast-paced Agile environment, with the ability to independently deliver end-to-end solutions, resolve blockers, and communicate effectively in English
+Hands-on experience with AWS (core services and cloud-native development)
+Strong experience with microservices, MVC, and event-driven architectures
+Strong experience with JPA / Hibernate
+Strong database design skills with PostgreSQL (advanced SQL) and DynamoDB, including schema design, optimization, and performance tuning
+Experience building and operating event-driven systems (e.g., Kafka, Kinesis)
+Solid test automation experience using JUnit and Cucumber
+Hands-on experience with GitHub Actions and/or similar CI/CD tools
+Ability to provide 6 hours overlap with US Central Time (CT) on business days (till 2 pm CT latest)
+Experience
+
+Processing and enriching event/telemetry data
+AWS Kinesis and CloudFormation
+jOOQ and Flyway
+Snowflake, BigQuery, or Databricks (data warehousing/analytics)
+Spring Cloud
+Geospatial data (PostGIS)

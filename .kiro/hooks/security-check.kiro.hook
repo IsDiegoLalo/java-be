@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Security & Config Review",
+  "description": "Reviews configuration and property files before they are written to ensure no secrets are hardcoded and security best practices are followed.",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "**/application*.yml",
+      "**/application*.properties",
+      "**/*.env",
+      "**/docker-compose*.yml"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A configuration file was just created. Verify: (1) No hardcoded secrets, passwords, or tokens - use environment variables or a secrets manager instead. (2) Sensitive values use placeholders like ${ENV_VAR}. (3) Database credentials are externalized. (4) Logging is configured without exposing sensitive data. If any issues are found, fix them immediately."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Compile Check on Save",
+  "description": "Runs a compilation check when Java or Kotlin source files are saved to catch syntax and type errors early.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*.java",
+      "**/*.kt"
+    ]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "if [ -f \"./gradlew\" ]; then ./gradlew compileJava compileKotlin --quiet 2>&1 | tail -20; elif [ -f \"./mvnw\" ]; then ./mvnw compile -q 2>&1 | tail -20; elif command -v gradle &> /dev/null; then gradle compileJava compileKotlin --quiet 2>&1 | tail -20; elif command -v mvn &> /dev/null; then mvn compile -q 2>&1 | tail -20; else echo \"No build tool found\"; fi"
+  }
+}

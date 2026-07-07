@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "SOLID & Best Practices Review",
+  "description": "Reviews Java and Kotlin code before writing to ensure it adheres to SOLID principles, uses appropriate design patterns, and follows project coding standards.",
+  "version": "1",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": [
+      "write"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before writing this code, verify it follows SOLID principles: (1) Single Responsibility - does each class have one reason to change? (2) Open/Closed - is it open for extension but closed for modification? (3) Liskov Substitution - are subtypes properly substitutable? (4) Interface Segregation - are interfaces small and focused? (5) Dependency Inversion - do high-level modules depend on abstractions? Also check: are design patterns applied where they naturally fit (not forced)? Does it follow Java/Kotlin naming conventions and best practices? If any principle is violated, revise the code before writing."
+  }
+}

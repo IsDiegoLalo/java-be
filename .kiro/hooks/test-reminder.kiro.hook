@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Test Reminder for New Files",
+  "description": "When a new Java or Kotlin source file is created, reminds the agent to also create corresponding unit tests.",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "**/src/main/**/*.java",
+      "**/src/main/**/*.kt"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A new source file was just created. Remember to create a corresponding unit test file in the test directory (src/test/java or src/test/kotlin). The test should: use JUnit 5, follow the Arrange-Act-Assert pattern, use descriptive test names (should_expectedBehavior_when_condition), and cover edge cases. For Kotlin, consider using MockK; for Java, use Mockito."
+  }
+}
