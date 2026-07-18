@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -64,6 +65,32 @@ class GlobalExceptionHandler {
             title = "Invalid State Transition",
             status = HttpStatus.UNPROCESSABLE_ENTITY.value(),
             detail = ex.message ?: "The requested state transition is not allowed",
+            instance = request.requestURI
+        )
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(problem)
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException::class)
+    fun handleMessageNotReadable(
+        ex: HttpMessageNotReadableException,
+        request: HttpServletRequest
+    ): ResponseEntity<ProblemDetailResponse> {
+        val cause = ex.cause
+        val detail = when {
+            cause is com.fasterxml.jackson.databind.exc.MismatchedInputException && cause.path.isNotEmpty() -> {
+                val fieldName = cause.path.joinToString(".") { it.fieldName ?: "[${it.index}]" }
+                "Missing required field: '$fieldName'"
+            }
+            ex.message?.contains("Required request body is missing") == true ->
+                "Request body is required"
+            else ->
+                "Malformed or unreadable request body"
+        }
+        val problem = ProblemDetailResponse(
+            type = "/problems/validation-error",
+            title = "Validation Error",
+            status = HttpStatus.UNPROCESSABLE_ENTITY.value(),
+            detail = detail,
             instance = request.requestURI
         )
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(problem)
