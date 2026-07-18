@@ -8,18 +8,18 @@ A Spring Boot 3.x microservice built with Kotlin and Java 21 that provides a com
 Hexagonal Architecture (Ports & Adapters)
 
 ┌─────────────────────────────────────────────────────────┐
-│                    REST API Layer                         │
-│  Controllers · DTOs · GlobalExceptionHandler (RFC 7807)  │
+│                    REST API Layer                       │
+│  Controllers · DTOs · GlobalExceptionHandler (RFC 7807) │
 ├─────────────────────────────────────────────────────────┤
-│                  Application Services                     │
-│  AuthorService · ArticleService · WorkflowService        │
-│  SearchService · EngagementService                       │
+│                  Application Services                   │
+│  AuthorService · ArticleService · WorkflowService       │
+│  SearchService · EngagementService                      │
 ├─────────────────────────────────────────────────────────┤
-│                    Domain Layer                           │
-│  Entities · Value Objects · Ports · Workflow Engine       │
+│                    Domain Layer                         │
+│  Entities · Value Objects · Ports · Workflow Engine     │
 ├─────────────────────────────────────────────────────────┤
-│               Infrastructure Adapters                    │
-│  PostgreSQL (JPA) · MongoDB · Kafka · Full-Text Search   │
+│               Infrastructure Adapters                   │
+│  PostgreSQL (JPA) · MongoDB · Kafka · Full-Text Search  │
 └─────────────────────────────────────────────────────────┘
 ```
 
