@@ -12,6 +12,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
 
 /**
  * Global exception handler that maps domain and framework exceptions
@@ -133,6 +134,26 @@ class GlobalExceptionHandler {
             fieldErrors = fieldErrors
         )
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(problem)
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException::class)
+    fun handleTypeMismatch(
+        ex: MethodArgumentTypeMismatchException,
+        request: HttpServletRequest
+    ): ResponseEntity<ProblemDetailResponse> {
+        val detail = if (ex.requiredType == UUID::class.java) {
+            "Invalid UUID format for parameter '${ex.name}': ${ex.value}"
+        } else {
+            "Invalid value for parameter '${ex.name}': ${ex.value}"
+        }
+        val problem = ProblemDetailResponse(
+            type = "/problems/not-found",
+            title = "Not Found",
+            status = HttpStatus.NOT_FOUND.value(),
+            detail = detail,
+            instance = request.requestURI
+        )
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problem)
     }
 
     @ExceptionHandler(Exception::class)

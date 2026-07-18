@@ -6,6 +6,7 @@ import com.platform.content.domain.model.Author
 import com.platform.content.domain.port.ArticleRepository
 import com.platform.content.domain.port.AuthorRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.time.Instant
 import java.util.UUID
 
@@ -14,6 +15,7 @@ import java.util.UUID
  * Orchestrates validation, uniqueness checks, and persistence via domain ports.
  */
 @Service
+@Transactional
 class AuthorService(
     private val authorRepository: AuthorRepository,
     private val articleRepository: ArticleRepository,
@@ -52,6 +54,7 @@ class AuthorService(
      * @return the Author entity
      * @throws EntityNotFoundException if no author exists with the given ID
      */
+    @Transactional(readOnly = true)
     fun findById(id: UUID): Author {
         return authorRepository.findById(id)
             ?: throw EntityNotFoundException("Author", id)
