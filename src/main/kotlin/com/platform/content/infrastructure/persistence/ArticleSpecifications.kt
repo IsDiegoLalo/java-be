@@ -39,13 +39,17 @@ object ArticleSpecifications {
 
             filter.tags?.let { tags ->
                 if (tags.isNotEmpty()) {
-                    // Tags are stored as PostgreSQL text[] serialized via StringListConverter.
-                    // Use LIKE on the serialized representation to check containment.
+                    // Tags are stored as a native PostgreSQL text[] array.
+                    // Use array_position to check if each tag exists in the array.
                     tags.forEach { tag ->
                         predicates.add(
-                            criteriaBuilder.like(
-                                root.get("tags"),
-                                "%\"$tag\"%"
+                            criteriaBuilder.isNotNull(
+                                criteriaBuilder.function(
+                                    "array_position",
+                                    Int::class.java,
+                                    root.get<Any>("tags"),
+                                    criteriaBuilder.literal(tag)
+                                )
                             )
                         )
                     }

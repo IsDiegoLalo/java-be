@@ -3,13 +3,15 @@ package com.platform.content.infrastructure.persistence
 import com.platform.content.domain.model.Article
 import com.platform.content.domain.model.ArticleStatus
 import jakarta.persistence.*
+import org.hibernate.annotations.JdbcTypeCode
+import org.hibernate.type.SqlTypes
 import java.time.Instant
 import java.util.UUID
 
 /**
  * JPA entity mapping for the articles table.
  * Uses database-level UUID generation (gen_random_uuid()).
- * Tags are stored as PostgreSQL TEXT[] and converted via StringListConverter.
+ * Tags are stored as PostgreSQL TEXT[] using Hibernate's native array type support.
  * Status is stored as VARCHAR and converted via ArticleStatusConverter.
  */
 @Entity
@@ -35,7 +37,7 @@ class ArticleEntity(
     var categoryId: UUID = UUID.randomUUID(),
 
     @Column(name = "tags", nullable = false, columnDefinition = "text[]")
-    @Convert(converter = StringListConverter::class)
+    @JdbcTypeCode(SqlTypes.ARRAY)
     var tags: List<String> = emptyList(),
 
     @Column(name = "status", nullable = false, length = 20)
