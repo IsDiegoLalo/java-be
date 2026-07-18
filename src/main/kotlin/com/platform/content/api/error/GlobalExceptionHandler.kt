@@ -9,10 +9,12 @@ import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
+import org.springframework.web.HttpRequestMethodNotSupportedException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException
+import org.springframework.web.servlet.resource.NoResourceFoundException
 import java.util.UUID
 
 /**
@@ -152,6 +154,36 @@ class GlobalExceptionHandler {
             title = "Not Found",
             status = HttpStatus.NOT_FOUND.value(),
             detail = detail,
+            instance = request.requestURI
+        )
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problem)
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException::class)
+    fun handleMethodNotSupported(
+        ex: HttpRequestMethodNotSupportedException,
+        request: HttpServletRequest
+    ): ResponseEntity<ProblemDetailResponse> {
+        val problem = ProblemDetailResponse(
+            type = "/problems/not-found",
+            title = "Not Found",
+            status = HttpStatus.NOT_FOUND.value(),
+            detail = "Resource not found: ${request.requestURI}",
+            instance = request.requestURI
+        )
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problem)
+    }
+
+    @ExceptionHandler(NoResourceFoundException::class)
+    fun handleNoResourceFound(
+        ex: NoResourceFoundException,
+        request: HttpServletRequest
+    ): ResponseEntity<ProblemDetailResponse> {
+        val problem = ProblemDetailResponse(
+            type = "/problems/not-found",
+            title = "Not Found",
+            status = HttpStatus.NOT_FOUND.value(),
+            detail = "Resource not found: ${request.requestURI}",
             instance = request.requestURI
         )
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problem)
