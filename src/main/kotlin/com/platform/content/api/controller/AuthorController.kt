@@ -33,6 +33,13 @@ class AuthorController(
         return ResponseEntity.status(HttpStatus.CREATED).body(AuthorResponse.fromDomain(author))
     }
 
+    @GetMapping
+    fun getAll(): ResponseEntity<List<AuthorResponse>> {
+        val authors = authorService.findAll()
+        return ResponseEntity.ok(authors.map { AuthorResponse.fromDomain(it) })
+    }
+
+
     @GetMapping("/{id}")
     fun getById(@PathVariable id: UUID): ResponseEntity<AuthorResponse> {
         val author = authorService.findById(id)

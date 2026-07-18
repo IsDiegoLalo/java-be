@@ -36,4 +36,9 @@ class JpaAuthorRepository(
     override fun existsByEmail(email: String): Boolean {
         return springDataRepository.existsByEmail(email)
     }
+
+    override fun findAll(): List<Author> {
+    return springDataRepository.findAll().map { it.toDomain() }
+}
+
 }

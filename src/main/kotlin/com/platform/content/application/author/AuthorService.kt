@@ -115,4 +115,9 @@ class AuthorService(
             throw ConflictException("Author", "Email address '$email' is already in use")
         }
     }
+
+    @Transactional(readOnly = true)
+    fun findAll(): List<Author> {
+        return authorRepository.findAll()
+    }
 }

@@ -9,6 +9,7 @@ import java.util.UUID
  */
 interface AuthorRepository {
     fun save(author: Author): Author
+    fun findAll(): List<Author>
     fun findById(id: UUID): Author?
     fun findByEmail(email: String): Author?
     fun deleteById(id: UUID)
